@@ -1,0 +1,25 @@
+{
+  "name": "gh-issue-cleaner-upper",
+  "version": "1.0.0",
+  "description": "A Chrome extension that filters out noisy automated timeline updates on GitHub issues, making it easier to focus on what matters.",
+  "main": "content.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/leereilly/gh-issue-cleaner-upper.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/leereilly/gh-issue-cleaner-upper/issues"
+  },
+  "homepage": "https://github.com/leereilly/gh-issue-cleaner-upper#readme",
+  "devDependencies": {
+    "jest": "^30.2.0",
+    "jest-environment-jsdom": "^30.2.0"
+  }
+}
