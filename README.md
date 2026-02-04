@@ -2,6 +2,8 @@
 
 A Chrome extension that filters out noisy automated timeline updates on GitHub issues, making it easier to focus on what matters.
 
+![](demo.webp)
+
 ## Features
 
 Hide configurable timeline events including:
