@@ -1,15 +1,16 @@
-# GitHub Issue Cleaner Upper 🧹
+# GitHub Issue Focus
 
 A Chrome extension that filters out noisy automated timeline updates on GitHub issues, making it easier to focus on what matters.
 
-![](demo.webp)
+![Demo](demo.webp)
 
 ## Features
 
 Hide configurable timeline events including:
-- **Project Events**: Added to project, moved in project, status changes
-- **Issue Events**: Labels added/removed, assignments, milestones, title renames
-- **Other Events**: Cross-references, closed/reopened status
+
+- **Project events**: Added to project, moved in project, status changes
+- **Issue events**: Labels added/removed, assignments, milestones, title renames
+- **Other events**: Cross-references, closed/reopened status
 
 ## Installation
 
@@ -42,14 +43,6 @@ Hide configurable timeline events including:
 | Cross-referenced | ❌ Shown | Mentions from other issues/PRs |
 | Closed | ❌ Shown | Issue closed events |
 | Reopened | ❌ Shown | Issue reopened events |
-
-## Development
-
-The extension uses:
-- `manifest.json` - Chrome extension manifest v3
-- `content.js` - Content script that detects and hides timeline events
-- `popup.html/css/js` - Configuration popup UI
-- `styles.css` - Injected styles for hiding elements
 
 ## License
 
