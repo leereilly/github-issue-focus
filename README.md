@@ -47,3 +47,35 @@ Hide configurable timeline events including:
 ## License
 
 MIT
+
+## Privacy Policy
+
+GitHub Issue Focus respects your privacy.
+
+### Data Collection
+
+This extension does not collect, store, transmit, or share any personal data.
+
+### How the Extension Works
+
+GitHub Issue Focus runs entirely in your browser. It modifies the visual presentation of GitHub issue pages by hiding selected timeline events based on your preferences. All processing happens locally on your device.
+
+### Data Storage
+
+Any settings or preferences (such as which timeline events are hidden) are stored locally using Chrome’s extension storage. This data never leaves your browser and is not accessible to the developer or any third party.
+
+### Third-Party Services
+
+This extension does not use analytics, tracking tools, advertising networks, or external APIs.
+
+### Permissions
+
+The extension only requests the minimum permissions necessary to function on GitHub issue pages. These permissions are used solely to modify page content and provide the extension’s features.
+
+### Changes to This Policy
+
+If this privacy policy changes in the future, updates will be reflected in the project repository.
+
+### Contact
+
+If you have questions or concerns about this privacy policy, you can open an issue on the project’s GitHub repository.
