@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "GitHub Issue Cleaner Upper",
+  "name": "GitHub Issue Focus",
   "version": "1.0.0",
   "description": "Filter out automated GitHub issue timeline updates to reduce noise",
   "permissions": ["storage"],

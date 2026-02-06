@@ -1,5 +1,5 @@
 /**
- * Tests for popup.js - GitHub Issue Cleaner Upper popup script
+ * Tests for popup.js - GitHub Issue Focus popup script
  */
 
 describe('Popup Script', () => {
@@ -23,7 +23,7 @@ describe('Popup Script', () => {
   function createPopupDOM() {
     document.body.innerHTML = `
       <div class="container">
-        <h1>Issue Cleaner Upper</h1>
+        <h1>Issue Focus</h1>
         <div class="filters">
           ${FILTER_IDS.map(id => `
             <label>

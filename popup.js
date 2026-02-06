@@ -1,4 +1,4 @@
-// GitHub Issue Cleaner Upper - Popup Script
+// GitHub Issue Focus - Popup Script
 
 const DEFAULT_FILTERS = {
   addedToProject: true,

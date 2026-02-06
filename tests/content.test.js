@@ -1,5 +1,5 @@
 /**
- * Tests for content.js - GitHub Issue Cleaner Upper content script
+ * Tests for content.js - GitHub Issue Focus content script
  */
 
 describe('Content Script', () => {

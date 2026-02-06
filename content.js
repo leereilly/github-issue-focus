@@ -1,4 +1,4 @@
-// GitHub Issue Cleaner Upper - Content Script
+// GitHub Issue Focus - Content Script
 
 const DEFAULT_FILTERS = {
   addedToProject: true,
