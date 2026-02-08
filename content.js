@@ -47,7 +47,8 @@ const EVENT_PATTERNS = {
   },
   milestoned: {
     selectors: ['[class*="milestoned"]', '[class*="MilestonedEvent"]'],
-    textPatterns: ['added this to the', 'milestone']
+    textPatterns: ['added this to the', 'milestone'],
+    iconClass: 'octicon-milestone'
   },
   renamed: {
     selectors: ['[class*="renamed"]', '[class*="RenamedTitleEvent"]'],
@@ -92,22 +93,32 @@ function detectEventType(element) {
   const text = wrapper.textContent || '';
   
   for (const [eventType, patterns] of Object.entries(EVENT_PATTERNS)) {
-    // Check selectors
+    // Check selectors first - these are most specific
     for (const selector of patterns.selectors) {
       if (wrapper.querySelector(selector) || wrapper.matches(selector)) {
         return eventType;
       }
     }
-    
-    // Check text patterns
-    for (const pattern of patterns.textPatterns) {
-      if (text.toLowerCase().includes(pattern.toLowerCase())) {
-        // Additional icon check for disambiguation
-        if (patterns.iconClass) {
+  }
+  
+  // Then check text patterns with icon requirements - these need disambiguation
+  for (const [eventType, patterns] of Object.entries(EVENT_PATTERNS)) {
+    if (patterns.iconClass) {
+      for (const pattern of patterns.textPatterns) {
+        if (text.toLowerCase().includes(pattern.toLowerCase())) {
           if (html.includes(patterns.iconClass)) {
             return eventType;
           }
-        } else {
+        }
+      }
+    }
+  }
+  
+  // Finally check text patterns without icon requirements - these are least specific
+  for (const [eventType, patterns] of Object.entries(EVENT_PATTERNS)) {
+    if (!patterns.iconClass) {
+      for (const pattern of patterns.textPatterns) {
+        if (text.toLowerCase().includes(pattern.toLowerCase())) {
           return eventType;
         }
       }
