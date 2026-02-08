@@ -2,6 +2,8 @@
 
 A Chrome extension that filters out noisy automated timeline updates on GitHub issues, making it easier to focus on what matters.
 
+Built using [GitHub Copilot CLI](https://github.com/features/copilot/cli) for the [GitHub Copilot CLI Challenge](https://dev.to/leereilly/i-built-a-chrome-extension-to-hide-noisy-github-issue-timeline-events-with-copilot-cli-255m).
+
 ![Demo](demo.webp)
 
 ## Features
