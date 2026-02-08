@@ -48,7 +48,8 @@ describe('Content Script', () => {
     },
     milestoned: {
       selectors: ['[class*="milestoned"]', '[class*="MilestonedEvent"]'],
-      textPatterns: ['added this to the', 'milestone']
+      textPatterns: ['added this to the', 'milestone'],
+      iconClass: 'octicon-milestone'
     },
     renamed: {
       selectors: ['[class*="renamed"]', '[class*="RenamedTitleEvent"]'],
@@ -94,19 +95,32 @@ describe('Content Script', () => {
     const text = wrapper.textContent || '';
     
     for (const [eventType, patterns] of Object.entries(EVENT_PATTERNS)) {
+      // Check selectors first - these are most specific
       for (const selector of patterns.selectors) {
         if (wrapper.querySelector(selector) || wrapper.matches(selector)) {
           return eventType;
         }
       }
-      
-      for (const pattern of patterns.textPatterns) {
-        if (text.toLowerCase().includes(pattern.toLowerCase())) {
-          if (patterns.iconClass) {
+    }
+    
+    // Then check text patterns with icon requirements - these need disambiguation
+    for (const [eventType, patterns] of Object.entries(EVENT_PATTERNS)) {
+      if (patterns.iconClass) {
+        for (const pattern of patterns.textPatterns) {
+          if (text.toLowerCase().includes(pattern.toLowerCase())) {
             if (html.includes(patterns.iconClass)) {
               return eventType;
             }
-          } else {
+          }
+        }
+      }
+    }
+    
+    // Finally check text patterns without icon requirements - these are least specific
+    for (const [eventType, patterns] of Object.entries(EVENT_PATTERNS)) {
+      if (!patterns.iconClass) {
+        for (const pattern of patterns.textPatterns) {
+          if (text.toLowerCase().includes(pattern.toLowerCase())) {
             return eventType;
           }
         }
@@ -374,6 +388,36 @@ describe('Content Script', () => {
       `;
       const element = document.querySelector('[data-timeline-event-id]');
       expect(detectEventType(element)).toBe('milestoned');
+    });
+
+    it('should detect milestoned event with "added this to" text pattern', () => {
+      document.body.innerHTML = `
+        <div data-wrapper-timeline-id="1">
+          <div data-timeline-event-id="1">
+            <svg class="octicon octicon-milestone"></svg>
+            User added this to the Test milestone
+          </div>
+        </div>
+      `;
+      const element = document.querySelector('[data-timeline-event-id]');
+      expect(detectEventType(element)).toBe('milestoned');
+    });
+
+    it('should NOT detect milestoned event as addedToProject', () => {
+      document.body.innerHTML = `
+        <div data-wrapper-timeline-id="1">
+          <div data-timeline-event-id="1">
+            <svg aria-hidden="true" focusable="false" class="octicon octicon-milestone" viewBox="0 0 16 16" width="16" height="16">
+              <path d="M7.75 0a.75.75 0 0 1 .75.75V3h3.634c.414 0"></path>
+            </svg>
+            <span>User</span> added this to the <a href="/milestone/1">Test milestone</a> milestone
+          </div>
+        </div>
+      `;
+      const element = document.querySelector('[data-timeline-event-id]');
+      const eventType = detectEventType(element);
+      expect(eventType).toBe('milestoned');
+      expect(eventType).not.toBe('addedToProject');
     });
 
     it('should detect movedInProject event', () => {
