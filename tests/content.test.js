@@ -190,6 +190,7 @@ describe('Content Script', () => {
       expect(EVENT_PATTERNS.unlabeled.iconClass).toBe('octicon-tag');
       expect(EVENT_PATTERNS.assigned.iconClass).toBe('octicon-person');
       expect(EVENT_PATTERNS.closed.iconClass).toBe('octicon-issue-closed');
+      expect(EVENT_PATTERNS.milestoned.iconClass).toBe('octicon-milestone');
     });
   });
 
