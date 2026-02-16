@@ -16,6 +16,8 @@ Hide configurable timeline events including:
 
 ## Installation
 
+[Via the Chrome Web Store](https://chromewebstore.google.com/detail/github-issue-focus/oglmkaafpnkanegndcglfnmengaecfak?hl=en&authuser=0)
+
 ### From Source (Developer Mode)
 
 1. Clone or download this repository
