@@ -19,6 +19,10 @@ describe('Content Script', () => {
   };
 
   const EVENT_PATTERNS = {
+    milestoned: {
+      selectors: ['[class*="milestoned"]', '[class*="MilestonedEvent"]'],
+      textPatterns: ['milestone']
+    },
     addedToProject: {
       selectors: ['[class*="AddedToProjectV2Event"]'],
       textPatterns: ['added this to']
@@ -45,11 +49,6 @@ describe('Content Script', () => {
       selectors: ['[class*="assignee"]', '[class*="AssignedEvent"]'],
       textPatterns: ['assigned', 'self-assigned'],
       iconClass: 'octicon-person'
-    },
-    milestoned: {
-      selectors: ['[class*="milestoned"]', '[class*="MilestonedEvent"]'],
-      textPatterns: ['added this to the', 'milestone'],
-      iconClass: 'octicon-milestone'
     },
     renamed: {
       selectors: ['[class*="renamed"]', '[class*="RenamedTitleEvent"]'],
@@ -190,7 +189,6 @@ describe('Content Script', () => {
       expect(EVENT_PATTERNS.unlabeled.iconClass).toBe('octicon-tag');
       expect(EVENT_PATTERNS.assigned.iconClass).toBe('octicon-person');
       expect(EVENT_PATTERNS.closed.iconClass).toBe('octicon-issue-closed');
-      expect(EVENT_PATTERNS.milestoned.iconClass).toBe('octicon-milestone');
     });
   });
 
@@ -391,7 +389,7 @@ describe('Content Script', () => {
       expect(detectEventType(element)).toBe('milestoned');
     });
 
-    it('should detect milestoned event with "added this to" text pattern', () => {
+    it('should detect milestoned event with milestone text pattern', () => {
       document.body.innerHTML = `
         <div data-wrapper-timeline-id="1">
           <div data-timeline-event-id="1">

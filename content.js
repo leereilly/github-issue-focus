@@ -18,6 +18,10 @@ let currentFilters = { ...DEFAULT_FILTERS };
 
 // Event type detection patterns
 const EVENT_PATTERNS = {
+  milestoned: {
+    selectors: ['[class*="milestoned"]', '[class*="MilestonedEvent"]'],
+    textPatterns: ['milestone']
+  },
   addedToProject: {
     selectors: ['[class*="AddedToProjectV2Event"]'],
     textPatterns: ['added this to']
@@ -44,11 +48,6 @@ const EVENT_PATTERNS = {
     selectors: ['[class*="assignee"]', '[class*="AssignedEvent"]'],
     textPatterns: ['assigned', 'self-assigned'],
     iconClass: 'octicon-person'
-  },
-  milestoned: {
-    selectors: ['[class*="milestoned"]', '[class*="MilestonedEvent"]'],
-    textPatterns: ['added this to the', 'milestone'],
-    iconClass: 'octicon-milestone'
   },
   renamed: {
     selectors: ['[class*="renamed"]', '[class*="RenamedTitleEvent"]'],
