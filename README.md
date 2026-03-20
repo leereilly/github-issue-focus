@@ -1,22 +1,66 @@
 # GitHub Issue Focus
 
-A [Chrome extension](https://chromewebstore.google.com/detail/github-issue-focus/oglmkaafpnkanegndcglfnmengaecfak?hl=en&authuser=0) that filters out noisy automated timeline updates on GitHub issues and pull requests, making it easier to focus on what matters. Take it for a spin on [this issue](https://github.com/leereilly/github-issue-focus/issues/1) - see how it compares before and after 🔎
+GitHub Issue Focus is a [Chrome extnsion](https://chromewebstore.google.com/detail/github-issue-focus/oglmkaafpnkanegndcglfnmengaecfak?hl=en&authuser=0) that cleans up noisy issue and pull request timelines so you can actually follow the conversation.
+
+Instead of wading through endless "added to project", "labeled", and "status changed" updates, you will see the signal. Real discussion, decisions, and context.
+
+**Less noise. More clarity.**
 
 ![Demo](demo.webp)
 
-[Install it Via the Chrome Web Store](https://chromewebstore.google.com/detail/github-issue-focus/oglmkaafpnkanegndcglfnmengaecfak?hl=en&authuser=0)
+[Install it Via the Chrome Web Store](https://chromewebstore.google.com/detail/github-issue-focus/oglmkaafpnkanegndcglfnmengaecfak?hl=en&authuser=0). Take it for a spin on [this issue](https://github.com/leereilly/github-issue-focus/issues/1) - see how it compares before and after 🔎
 
-## Features
 
-Hide configurable timeline events including:
+## ✨ Why you will love it
 
-- **Project events**: Added to project, moved in project, status changes
-- **Issue events**: Labels added/removed, assignments, milestones, title renames
-- **Other events**: Cross-references, closed/reopened status
+- 🧹 **Instantly declutter timelines**  
+  Hide repetitive, automated updates that do not add value to you.
+
+- 🎯 **Focus on real conversations**  
+  Surface the comments and changes that actually matter.
+
+- ⚡ **Works automatically**  
+  No setup required. Install and your GitHub issues are instantly cleaner.
+
+- 🎛️ **Fully customizable**  
+  Choose exactly which events to hide or show.
+
+---
+
+## 🔍 What it filters
+
+Hide common timeline noise like:
+
+- Project changes (added, moved, status updates)
+- Label changes (added and removed)
+- Assignments and milestones
+- Title edits
+- Other routine automation events
+
+Keep important signals like:
+
+- 💬 Comments and discussions  
+- 🔗 Cross-references  
+- ✅ Closed and reopened events  
+
+## 🔒 Privacy first
+
+- No tracking  
+- No analytics  
+- No data collection  
+- Everything runs locally in your browser  
+
+## 🧩 Perfect for
+
+- Developers reviewing issues and PRs  
+- Maintainers managing busy repositories  
+- Anyone tired of GitHub timeline noise  
 
 ## Installation
 
-[Via the Chrome Web Store](https://chromewebstore.google.com/detail/github-issue-focus/oglmkaafpnkanegndcglfnmengaecfak?hl=en&authuser=0)
+### Via the Chrome Web Store
+
+[Click here](https://chromewebstore.google.com/detail/github-issue-focus/oglmkaafpnkanegndcglfnmengaecfak?hl=en&authuser=0)
 
 ### From Source (Developer Mode)
 
