@@ -8,7 +8,7 @@ Instead of wading through endless "added to project", "labeled", and "status cha
 
 ![Demo](demo.webp)
 
-[Install it Via the Chrome Web Store](https://chromewebstore.google.com/detail/github-issue-focus/oglmkaafpnkanegndcglfnmengaecfak?hl=en&authuser=0). Take it for a spin on [this issue](https://github.com/leereilly/github-issue-focus/issues/1) - see how it compares before and after 🔎
+[Install it Via the Chrome Web Store](https://chromewebstore.google.com/detail/github-issue-focus/oglmkaafpnkanegndcglfnmengaecfak?hl=en&authuser=0). Take it for a spin on [this issue](https://github.com/leereilly/github-issue-focus/issues/1) - see how it compares before and after.
 
 
 ## ✨ Why you will love it
