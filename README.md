@@ -1,8 +1,6 @@
 # GitHub Issue Focus
 
-A Chrome extension that filters out noisy automated timeline updates on GitHub issues, making it easier to focus on what matters.
-
-Built using [GitHub Copilot CLI](https://github.com/features/copilot/cli) for the [GitHub Copilot CLI Challenge](https://dev.to/leereilly/i-built-a-chrome-extension-to-hide-noisy-github-issue-timeline-events-with-copilot-cli-255m).
+A Chrome extension that filters out noisy automated timeline updates on GitHub issues, making it easier to focus on what matters. [Install it Via the Chrome Web Store](https://chromewebstore.google.com/detail/github-issue-focus/oglmkaafpnkanegndcglfnmengaecfak?hl=en&authuser=0)
 
 ![Demo](demo.webp)
 
@@ -83,3 +81,5 @@ If this privacy policy changes in the future, updates will be reflected in the p
 ### Contact
 
 If you have questions or concerns about this privacy policy, you can open an issue on the project’s GitHub repository.
+
+Built using [GitHub Copilot CLI](https://github.com/features/copilot/cli) for the [GitHub Copilot CLI Challenge](https://dev.to/leereilly/i-built-a-chrome-extension-to-hide-noisy-github-issue-timeline-events-with-copilot-cli-255m).
