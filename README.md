@@ -2,6 +2,8 @@
 
 A Chrome extension that filters out noisy automated timeline updates on GitHub issues, making it easier to focus on what matters.
 
+Built using [GitHub Copilot CLI](https://github.com/features/copilot/cli) for the [GitHub Copilot CLI Challenge](https://dev.to/leereilly/i-built-a-chrome-extension-to-hide-noisy-github-issue-timeline-events-with-copilot-cli-255m).
+
 ![Demo](demo.webp)
 
 ## Features
@@ -13,6 +15,8 @@ Hide configurable timeline events including:
 - **Other events**: Cross-references, closed/reopened status
 
 ## Installation
+
+[Via the Chrome Web Store](https://chromewebstore.google.com/detail/github-issue-focus/oglmkaafpnkanegndcglfnmengaecfak?hl=en&authuser=0)
 
 ### From Source (Developer Mode)
 
@@ -47,3 +51,35 @@ Hide configurable timeline events including:
 ## License
 
 MIT
+
+## Privacy Policy
+
+GitHub Issue Focus respects your privacy.
+
+### Data Collection
+
+This extension does not collect, store, transmit, or share any personal data.
+
+### How the Extension Works
+
+GitHub Issue Focus runs entirely in your browser. It modifies the visual presentation of GitHub issue pages by hiding selected timeline events based on your preferences. All processing happens locally on your device.
+
+### Data Storage
+
+Any settings or preferences (such as which timeline events are hidden) are stored locally using Chrome’s extension storage. This data never leaves your browser and is not accessible to the developer or any third party.
+
+### Third-Party Services
+
+This extension does not use analytics, tracking tools, advertising networks, or external APIs.
+
+### Permissions
+
+The extension only requests the minimum permissions necessary to function on GitHub issue pages. These permissions are used solely to modify page content and provide the extension’s features.
+
+### Changes to This Policy
+
+If this privacy policy changes in the future, updates will be reflected in the project repository.
+
+### Contact
+
+If you have questions or concerns about this privacy policy, you can open an issue on the project’s GitHub repository.
