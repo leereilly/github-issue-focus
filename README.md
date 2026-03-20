@@ -1,8 +1,10 @@
 # GitHub Issue Focus
 
-A Chrome extension that filters out noisy automated timeline updates on GitHub issues, making it easier to focus on what matters. [Install it Via the Chrome Web Store](https://chromewebstore.google.com/detail/github-issue-focus/oglmkaafpnkanegndcglfnmengaecfak?hl=en&authuser=0)
+A [Chrome extension](https://chromewebstore.google.com/detail/github-issue-focus/oglmkaafpnkanegndcglfnmengaecfak?hl=en&authuser=0) that filters out noisy automated timeline updates on GitHub issues and pull requests, making it easier to focus on what matters. Take it for a spin on [this issue](https://github.com/leereilly/github-issue-focus/issues/1) - see how it compares before and after 🔎
 
 ![Demo](demo.webp)
+
+[Install it Via the Chrome Web Store](https://chromewebstore.google.com/detail/github-issue-focus/oglmkaafpnkanegndcglfnmengaecfak?hl=en&authuser=0)
 
 ## Features
 
