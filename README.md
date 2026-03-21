@@ -1,20 +1,16 @@
 # GitHub Issue Focus
 
-GitHub Issue Focus is a [Chrome extnsion](https://chromewebstore.google.com/detail/github-issue-focus/oglmkaafpnkanegndcglfnmengaecfak?hl=en&authuser=0) that cleans up noisy issue and pull request timelines so you can actually follow the conversation.
+GitHub Issue Focus is a [Chrome extension](https://chromewebstore.google.com/detail/github-issue-focus/oglmkaafpnkanegndcglfnmengaecfak?hl=en&authuser=0) that cleans up noisy issue and pull request timelines so you can actually follow the conversation.
 
-<<<<<<< HEAD
+Instead of wading through endless "added to project", "labeled", and "status changed" updates, you will see the signal. Real discussion, decisions, and context.
+
+**Less noise. More clarity.**
+
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="images/drake-dark.webp">
   <source media="(prefers-color-scheme: light)" srcset="images/drake-light.webp">
   <img alt="Demo" src="images/drake-light.webp">
 </picture>
-=======
-Instead of wading through endless "added to project", "labeled", and "status changed" updates, you will see the signal. Real discussion, decisions, and context.
-
-**Less noise. More clarity.**
-
-![Demo](demo.webp)
->>>>>>> 2261a871b911c9fbe6a55b5ce5fa80687fc7983f
 
 [Install it Via the Chrome Web Store](https://chromewebstore.google.com/detail/github-issue-focus/oglmkaafpnkanegndcglfnmengaecfak?hl=en&authuser=0). Take it for a spin on [this issue](https://github.com/leereilly/github-issue-focus/issues/1) - see how it compares before and after.
 
@@ -136,10 +132,6 @@ If this privacy policy changes in the future, updates will be reflected in the p
 
 If you have questions or concerns about this privacy policy, you can open an issue on the project’s GitHub repository.
 
-<<<<<<< HEAD
 ---
 
 Built using [GitHub Copilot CLI](https://github.com/features/copilot/cli) for the [GitHub Copilot CLI Challenge](https://dev.to/leereilly/i-built-a-chrome-extension-to-hide-noisy-github-issue-timeline-events-with-copilot-cli-255m).
-=======
-Built using [GitHub Copilot CLI](https://github.com/features/copilot/cli) for the [GitHub Copilot CLI Challenge](https://dev.to/leereilly/i-built-a-chrome-extension-to-hide-noisy-github-issue-timeline-events-with-copilot-cli-255m).
->>>>>>> 2261a871b911c9fbe6a55b5ce5fa80687fc7983f
