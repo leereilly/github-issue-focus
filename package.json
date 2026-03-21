@@ -1,5 +1,5 @@
 {
-  "name": "gh-issue-cleaner-upper",
+  "name": "github-issue-focus",
   "version": "1.1.0",
   "description": "A Chrome extension that filters out noisy automated timeline updates on GitHub issues, making it easier to focus on what matters.",
   "main": "content.js",
@@ -8,16 +8,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/leereilly/gh-issue-cleaner-upper.git"
+    "url": "git+https://github.com/leereilly/github-issue-focus.git"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": ["chrome-extension", "github", "issue", "filter", "focus", "timeline", "noise"],
+  "author": "Lee Reilly",
+  "license": "MIT",
   "type": "commonjs",
   "bugs": {
-    "url": "https://github.com/leereilly/gh-issue-cleaner-upper/issues"
+    "url": "https://github.com/leereilly/github-issue-focus/issues"
   },
-  "homepage": "https://github.com/leereilly/gh-issue-cleaner-upper#readme",
+  "homepage": "https://github.com/leereilly/github-issue-focus#readme",
   "devDependencies": {
     "jest": "^30.2.0",
     "jest-environment-jsdom": "^30.2.0",

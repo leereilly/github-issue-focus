@@ -2,148 +2,9 @@
  * Tests for content.js - GitHub Issue Focus content script
  */
 
+const { DEFAULT_FILTERS, EVENT_PATTERNS, getTimelineItems, getEventWrapper, detectEventType, filterTimelineItems } = require('../content');
+
 describe('Content Script', () => {
-  // Import the constants and functions we need to test
-  const DEFAULT_FILTERS = {
-    addedToProject: true,
-    movedInProject: true,
-    statusChanged: true,
-    labeled: true,
-    unlabeled: true,
-    assigned: true,
-    milestoned: true,
-    renamed: true,
-    crossReferenced: false,
-    closed: false,
-    reopened: false
-  };
-
-  const EVENT_PATTERNS = {
-    milestoned: {
-      selectors: ['[class*="milestoned"]', '[class*="MilestonedEvent"]'],
-      textPatterns: ['milestone']
-    },
-    addedToProject: {
-      selectors: ['[class*="AddedToProjectV2Event"]'],
-      textPatterns: ['added this to']
-    },
-    movedInProject: {
-      selectors: ['[class*="ProjectV2ItemStatusChangedEvent"]'],
-      textPatterns: ['moved this to', 'moved this from']
-    },
-    statusChanged: {
-      selectors: ['[class*="ProjectV2ItemStatusChangedEvent"]'],
-      textPatterns: ['set the']
-    },
-    labeled: {
-      selectors: ['[class*="labeledEvent"]', '[class*="LabeledEvent"]'],
-      textPatterns: ['added', 'labeled'],
-      iconClass: 'octicon-tag'
-    },
-    unlabeled: {
-      selectors: ['[class*="unlabeledEvent"]', '[class*="UnlabeledEvent"]'],
-      textPatterns: ['removed', 'unlabeled'],
-      iconClass: 'octicon-tag'
-    },
-    assigned: {
-      selectors: ['[class*="assignee"]', '[class*="AssignedEvent"]'],
-      textPatterns: ['assigned', 'self-assigned'],
-      iconClass: 'octicon-person'
-    },
-    renamed: {
-      selectors: ['[class*="renamed"]', '[class*="RenamedTitleEvent"]'],
-      textPatterns: ['changed the title']
-    },
-    crossReferenced: {
-      selectors: ['[class*="cross-referenced"]', '[class*="CrossReferencedEvent"]'],
-      textPatterns: ['mentioned this', 'referenced this']
-    },
-    closed: {
-      selectors: ['[class*="ClosedEvent"]'],
-      textPatterns: ['closed this'],
-      iconClass: 'octicon-issue-closed'
-    },
-    reopened: {
-      selectors: ['[class*="ReopenedEvent"]'],
-      textPatterns: ['reopened this']
-    }
-  };
-
-  // Helper function to replicate getTimelineItems
-  function getTimelineItems() {
-    const items = document.querySelectorAll('[data-timeline-event-id]');
-    return Array.from(items);
-  }
-
-  // Helper function to replicate getEventWrapper
-  function getEventWrapper(element) {
-    let current = element;
-    while (current && current !== document.body) {
-      if (current.hasAttribute('data-wrapper-timeline-id')) {
-        return current;
-      }
-      current = current.parentElement;
-    }
-    return element.closest('[data-wrapper-timeline-id]') || element;
-  }
-
-  // Helper function to replicate detectEventType
-  function detectEventType(element) {
-    const wrapper = getEventWrapper(element);
-    const html = wrapper.innerHTML || '';
-    const text = wrapper.textContent || '';
-    
-    for (const [eventType, patterns] of Object.entries(EVENT_PATTERNS)) {
-      // Check selectors first - these are most specific
-      for (const selector of patterns.selectors) {
-        if (wrapper.querySelector(selector) || wrapper.matches(selector)) {
-          return eventType;
-        }
-      }
-    }
-    
-    // Then check text patterns with icon requirements - these need disambiguation
-    for (const [eventType, patterns] of Object.entries(EVENT_PATTERNS)) {
-      if (patterns.iconClass) {
-        for (const pattern of patterns.textPatterns) {
-          if (text.toLowerCase().includes(pattern.toLowerCase())) {
-            if (html.includes(patterns.iconClass)) {
-              return eventType;
-            }
-          }
-        }
-      }
-    }
-    
-    // Finally check text patterns without icon requirements - these are least specific
-    for (const [eventType, patterns] of Object.entries(EVENT_PATTERNS)) {
-      if (!patterns.iconClass) {
-        for (const pattern of patterns.textPatterns) {
-          if (text.toLowerCase().includes(pattern.toLowerCase())) {
-            return eventType;
-          }
-        }
-      }
-    }
-    
-    return null;
-  }
-
-  // Helper to replicate filterTimelineItems
-  function filterTimelineItems(currentFilters) {
-    const items = getTimelineItems();
-    
-    items.forEach(item => {
-      const wrapper = getEventWrapper(item);
-      const eventType = detectEventType(item);
-      
-      if (eventType && currentFilters[eventType]) {
-        wrapper.classList.add('gh-cleaner-hidden');
-      } else {
-        wrapper.classList.remove('gh-cleaner-hidden');
-      }
-    });
-  }
 
   describe('DEFAULT_FILTERS', () => {
     it('should have correct default filter values', () => {
@@ -153,15 +14,16 @@ describe('Content Script', () => {
       expect(DEFAULT_FILTERS.labeled).toBe(true);
       expect(DEFAULT_FILTERS.unlabeled).toBe(true);
       expect(DEFAULT_FILTERS.assigned).toBe(true);
+      expect(DEFAULT_FILTERS.unassigned).toBe(true);
       expect(DEFAULT_FILTERS.milestoned).toBe(true);
       expect(DEFAULT_FILTERS.renamed).toBe(true);
-      expect(DEFAULT_FILTERS.crossReferenced).toBe(false);
-      expect(DEFAULT_FILTERS.closed).toBe(false);
-      expect(DEFAULT_FILTERS.reopened).toBe(false);
+      expect(DEFAULT_FILTERS.crossReferenced).toBe(true);
+      expect(DEFAULT_FILTERS.closed).toBe(true);
+      expect(DEFAULT_FILTERS.reopened).toBe(true);
     });
 
-    it('should have 11 filter types', () => {
-      expect(Object.keys(DEFAULT_FILTERS)).toHaveLength(11);
+    it('should have 12 filter types', () => {
+      expect(Object.keys(DEFAULT_FILTERS)).toHaveLength(12);
     });
   });
 
@@ -188,6 +50,7 @@ describe('Content Script', () => {
       expect(EVENT_PATTERNS.labeled.iconClass).toBe('octicon-tag');
       expect(EVENT_PATTERNS.unlabeled.iconClass).toBe('octicon-tag');
       expect(EVENT_PATTERNS.assigned.iconClass).toBe('octicon-person');
+      expect(EVENT_PATTERNS.unassigned.iconClass).toBe('octicon-person');
       expect(EVENT_PATTERNS.closed.iconClass).toBe('octicon-issue-closed');
     });
   });
@@ -326,6 +189,32 @@ describe('Content Script', () => {
       `;
       const element = document.querySelector('[data-timeline-event-id]');
       expect(detectEventType(element)).toBe('assigned');
+    });
+
+    it('should detect unassigned event', () => {
+      document.body.innerHTML = `
+        <div data-wrapper-timeline-id="1">
+          <div data-timeline-event-id="1">
+            <svg class="octicon-person"></svg>
+            User unassigned developer
+          </div>
+        </div>
+      `;
+      const element = document.querySelector('[data-timeline-event-id]');
+      expect(detectEventType(element)).toBe('unassigned');
+    });
+
+    it('should not detect "unassigned" text as assigned event', () => {
+      document.body.innerHTML = `
+        <div data-wrapper-timeline-id="1">
+          <div data-timeline-event-id="1">
+            <svg class="octicon-person"></svg>
+            User unassigned developer
+          </div>
+        </div>
+      `;
+      const element = document.querySelector('[data-timeline-event-id]');
+      expect(detectEventType(element)).not.toBe('assigned');
     });
 
     it('should detect renamed event', () => {
@@ -490,7 +379,7 @@ describe('Content Script', () => {
     });
 
     it('should not hide items with disabled filters', () => {
-      const filters = { ...DEFAULT_FILTERS };
+      const filters = { ...DEFAULT_FILTERS, reopened: false };
       filterTimelineItems(filters);
       
       const wrapper3 = document.querySelector('[data-wrapper-timeline-id="3"]');

@@ -7,6 +7,7 @@ const DEFAULT_FILTERS = {
   labeled: true,
   unlabeled: true,
   assigned: true,
+  unassigned: true,
   milestoned: true,
   renamed: true,
   crossReferenced: true,
@@ -16,7 +17,7 @@ const DEFAULT_FILTERS = {
 
 const FILTER_IDS = Object.keys(DEFAULT_FILTERS);
 
-function loadFilters() {
+function loadFilters(callback) {
   chrome.storage.sync.get(['filters'], (result) => {
     const filters = { ...DEFAULT_FILTERS, ...result.filters };
     FILTER_IDS.forEach(id => {
@@ -26,6 +27,7 @@ function loadFilters() {
       }
     });
     updateMasterToggle();
+    if (callback) callback(filters);
   });
 }
 
@@ -39,6 +41,7 @@ function saveFilters() {
   });
   chrome.storage.sync.set({ filters });
   updateMasterToggle();
+  return filters;
 }
 
 function updateMasterToggle() {
@@ -77,9 +80,9 @@ function toggleAll(checked) {
   saveFilters();
 }
 
-function resetFilters() {
+function resetFilters(callback) {
   chrome.storage.sync.set({ filters: DEFAULT_FILTERS }, () => {
-    loadFilters();
+    loadFilters(callback);
   });
 }
 
@@ -139,3 +142,7 @@ document.addEventListener('DOMContentLoaded', () => {
     resetBtn.addEventListener('click', resetFilters);
   }
 });
+
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = { DEFAULT_FILTERS, FILTER_IDS, loadFilters, saveFilters, resetFilters, updateMasterToggle, toggleAll, applyTheme };
+}

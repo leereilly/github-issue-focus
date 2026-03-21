@@ -7,6 +7,7 @@ const DEFAULT_FILTERS = {
   labeled: true,
   unlabeled: true,
   assigned: true,
+  unassigned: true,
   milestoned: true,
   renamed: true,
   crossReferenced: true,
@@ -43,6 +44,11 @@ const EVENT_PATTERNS = {
     selectors: ['[class*="unlabeledEvent"]', '[class*="UnlabeledEvent"]'],
     textPatterns: ['removed', 'unlabeled'],
     iconClass: 'octicon-tag'
+  },
+  unassigned: {
+    selectors: ['[class*="UnassignedEvent"]'],
+    textPatterns: ['unassigned'],
+    iconClass: 'octicon-person'
   },
   assigned: {
     selectors: ['[class*="assignee"]', '[class*="AssignedEvent"]'],
@@ -127,19 +133,30 @@ function detectEventType(element) {
   return null;
 }
 
-function filterTimelineItems() {
+function updateBadge() {
+  const hiddenCount = document.querySelectorAll('.gh-cleaner-hidden').length;
+  if (chrome.action && chrome.action.setBadgeText) {
+    chrome.action.setBadgeText({ text: hiddenCount > 0 ? String(hiddenCount) : '' });
+    chrome.action.setBadgeBackgroundColor({ color: '#006e2c' });
+  }
+}
+
+function filterTimelineItems(overrideFilters) {
+  const filters = overrideFilters || currentFilters;
   const items = getTimelineItems();
   
   items.forEach(item => {
     const wrapper = getEventWrapper(item);
     const eventType = detectEventType(item);
     
-    if (eventType && currentFilters[eventType]) {
+    if (eventType && filters[eventType]) {
       wrapper.classList.add('gh-cleaner-hidden');
     } else {
       wrapper.classList.remove('gh-cleaner-hidden');
     }
   });
+
+  updateBadge();
 }
 
 function loadFilters() {
@@ -159,49 +176,56 @@ function detectGitHubTheme() {
   }
 }
 
-detectGitHubTheme();
+// Only run side effects in browser context (not during test require())
+if (typeof module === 'undefined') {
+  detectGitHubTheme();
 
-// Watch for theme changes (e.g. user toggles GitHub appearance settings)
-new MutationObserver(() => detectGitHubTheme()).observe(document.documentElement, {
-  attributes: true,
-  attributeFilter: ['data-color-mode']
-});
+  // Watch for theme changes (e.g. user toggles GitHub appearance settings)
+  new MutationObserver(() => detectGitHubTheme()).observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ['data-color-mode']
+  });
 
-// Initialize
-loadFilters();
+  // Initialize
+  loadFilters();
 
-// Listen for filter changes from popup
-chrome.storage.onChanged.addListener((changes, namespace) => {
-  if (namespace === 'sync' && changes.filters) {
-    currentFilters = { ...DEFAULT_FILTERS, ...changes.filters.newValue };
-    filterTimelineItems();
-  }
-});
-
-// Observe DOM changes for dynamically loaded content
-const observer = new MutationObserver((mutations) => {
-  let shouldFilter = false;
-  for (const mutation of mutations) {
-    if (mutation.addedNodes.length > 0) {
-      shouldFilter = true;
-      break;
+  // Listen for filter changes from popup
+  chrome.storage.onChanged.addListener((changes, namespace) => {
+    if (namespace === 'sync' && changes.filters) {
+      currentFilters = { ...DEFAULT_FILTERS, ...changes.filters.newValue };
+      filterTimelineItems();
     }
-  }
-  if (shouldFilter) {
-    setTimeout(filterTimelineItems, 100);
-  }
-});
+  });
 
-observer.observe(document.body, {
-  childList: true,
-  subtree: true
-});
+  // Observe DOM changes for dynamically loaded content
+  const observer = new MutationObserver((mutations) => {
+    let shouldFilter = false;
+    for (const mutation of mutations) {
+      if (mutation.addedNodes.length > 0) {
+        shouldFilter = true;
+        break;
+      }
+    }
+    if (shouldFilter) {
+      setTimeout(filterTimelineItems, 100);
+    }
+  });
 
-// Re-filter on navigation (GitHub uses client-side routing)
-let lastUrl = location.href;
-new MutationObserver(() => {
-  if (location.href !== lastUrl) {
-    lastUrl = location.href;
-    setTimeout(filterTimelineItems, 500);
-  }
-}).observe(document, { subtree: true, childList: true });
+  observer.observe(document.body, {
+    childList: true,
+    subtree: true
+  });
+
+  // Re-filter on navigation (GitHub uses client-side routing)
+  let lastUrl = location.href;
+  new MutationObserver(() => {
+    if (location.href !== lastUrl) {
+      lastUrl = location.href;
+      setTimeout(filterTimelineItems, 500);
+    }
+  }).observe(document, { subtree: true, childList: true });
+}
+
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = { DEFAULT_FILTERS, EVENT_PATTERNS, getTimelineItems, getEventWrapper, detectEventType, filterTimelineItems };
+}

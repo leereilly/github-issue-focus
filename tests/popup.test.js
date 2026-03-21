@@ -2,22 +2,9 @@
  * Tests for popup.js - GitHub Issue Focus popup script
  */
 
-describe('Popup Script', () => {
-  const DEFAULT_FILTERS = {
-    addedToProject: true,
-    movedInProject: true,
-    statusChanged: true,
-    labeled: true,
-    unlabeled: true,
-    assigned: true,
-    milestoned: true,
-    renamed: true,
-    crossReferenced: false,
-    closed: false,
-    reopened: false
-  };
+const { DEFAULT_FILTERS, FILTER_IDS, loadFilters, saveFilters, resetFilters } = require('../popup');
 
-  const FILTER_IDS = Object.keys(DEFAULT_FILTERS);
+describe('Popup Script', () => {
 
   // Create popup HTML structure
   function createPopupDOM() {
@@ -37,45 +24,13 @@ describe('Popup Script', () => {
     `;
   }
 
-  // Helper functions that replicate popup.js behavior
-  function loadFilters(callback) {
-    chrome.storage.sync.get(['filters'], (result) => {
-      const filters = { ...DEFAULT_FILTERS, ...result.filters };
-      FILTER_IDS.forEach(id => {
-        const checkbox = document.getElementById(id);
-        if (checkbox) {
-          checkbox.checked = filters[id];
-        }
-      });
-      if (callback) callback(filters);
-    });
-  }
-
-  function saveFilters() {
-    const filters = {};
-    FILTER_IDS.forEach(id => {
-      const checkbox = document.getElementById(id);
-      if (checkbox) {
-        filters[id] = checkbox.checked;
-      }
-    });
-    chrome.storage.sync.set({ filters });
-    return filters;
-  }
-
-  function resetFilters(callback) {
-    chrome.storage.sync.set({ filters: DEFAULT_FILTERS }, () => {
-      loadFilters(callback);
-    });
-  }
-
   beforeEach(() => {
     createPopupDOM();
   });
 
   describe('DEFAULT_FILTERS', () => {
     it('should have the correct number of filter types', () => {
-      expect(FILTER_IDS).toHaveLength(11);
+      expect(FILTER_IDS).toHaveLength(12);
     });
 
     it('should have expected filter IDs', () => {
@@ -85,6 +40,7 @@ describe('Popup Script', () => {
       expect(FILTER_IDS).toContain('labeled');
       expect(FILTER_IDS).toContain('unlabeled');
       expect(FILTER_IDS).toContain('assigned');
+      expect(FILTER_IDS).toContain('unassigned');
       expect(FILTER_IDS).toContain('milestoned');
       expect(FILTER_IDS).toContain('renamed');
       expect(FILTER_IDS).toContain('crossReferenced');
@@ -216,7 +172,7 @@ describe('Popup Script', () => {
 
       resetFilters(() => {
         expect(document.getElementById('addedToProject').checked).toBe(true);
-        expect(document.getElementById('closed').checked).toBe(false);
+        expect(document.getElementById('closed').checked).toBe(true);
         done();
       });
     });

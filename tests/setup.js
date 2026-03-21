@@ -11,7 +11,17 @@ global.chrome = {
     },
     onChanged: {
       addListener: jest.fn()
+    },
+    local: {
+      get: jest.fn((keys, callback) => {
+        if (callback) callback({});
+      }),
+      set: jest.fn()
     }
+  },
+  action: {
+    setBadgeText: jest.fn(),
+    setBadgeBackgroundColor: jest.fn()
   }
 };
 

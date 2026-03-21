@@ -45,7 +45,7 @@
 }
 
 body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif;
   font-size: 14px;
   color: var(--on-surface);
   background: var(--surface);
@@ -182,9 +182,13 @@ body {
   flex-shrink: 0;
 }
 
-.master-icon-box .material-symbols-outlined {
+.master-icon-box .icon {
   color: var(--on-primary-container);
-  font-size: 22px;
+}
+
+.master-icon-box .icon svg {
+  width: 22px;
+  height: 22px;
 }
 
 .master-title {
@@ -299,8 +303,31 @@ body {
   transform: translateX(24px);
 }
 
-/* ── Material Symbols base ──────────────────────────────────────── */
+/* ── Icon base ──────────────────────────────────────────────────── */
 
-.material-symbols-outlined {
-  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+.icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon svg {
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+}
+
+.header-icon svg {
+  width: 22px;
+  height: 22px;
+}
+
+.section-icon svg {
+  width: 16px;
+  height: 16px;
+}
+
+.row-icon svg {
+  width: 20px;
+  height: 20px;
 }
