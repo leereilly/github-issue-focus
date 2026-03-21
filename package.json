@@ -1,6 +1,6 @@
 {
   "name": "gh-issue-cleaner-upper",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A Chrome extension that filters out noisy automated timeline updates on GitHub issues, making it easier to focus on what matters.",
   "main": "content.js",
   "scripts": {

@@ -9,9 +9,9 @@ const DEFAULT_FILTERS = {
   assigned: true,
   milestoned: true,
   renamed: true,
-  crossReferenced: false,
-  closed: false,
-  reopened: false
+  crossReferenced: true,
+  closed: true,
+  reopened: true
 };
 
 let currentFilters = { ...DEFAULT_FILTERS };
@@ -150,6 +150,22 @@ function loadFilters() {
     filterTimelineItems();
   });
 }
+
+// Detect GitHub's theme setting and store it for the popup
+function detectGitHubTheme() {
+  const colorMode = document.documentElement.getAttribute('data-color-mode');
+  if (colorMode) {
+    chrome.storage.local.set({ githubTheme: colorMode });
+  }
+}
+
+detectGitHubTheme();
+
+// Watch for theme changes (e.g. user toggles GitHub appearance settings)
+new MutationObserver(() => detectGitHubTheme()).observe(document.documentElement, {
+  attributes: true,
+  attributeFilter: ['data-color-mode']
+});
 
 // Initialize
 loadFilters();

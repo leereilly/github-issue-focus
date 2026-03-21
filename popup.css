@@ -1,4 +1,4 @@
-/* GitHub Issue Focus - Popup Styles */
+/* GitHub Issue Filter — "The Polished Utility" Design System */
 
 * {
   box-sizing: border-box;
@@ -6,54 +6,245 @@
   padding: 0;
 }
 
+:root {
+  --primary: #006e2c;
+  --primary-dim: #006025;
+  --primary-container: #88fb99;
+  --on-primary-container: #005f25;
+  --surface: #f7f9ff;
+  --surface-container-low: #ecf4ff;
+  --surface-container-lowest: #ffffff;
+  --surface-container-highest: #cce5ff;
+  --surface-variant: #cce5ff;
+  --on-surface: #17354b;
+  --on-surface-variant: #46627a;
+  --outline: #627e97;
+  --outline-variant: #99b5d1;
+  --card-border: rgba(153, 181, 209, 0.2);
+  --card-shadow: rgba(23, 53, 75, 0.04);
+  --slider-thumb: #ffffff;
+}
+
+:root.dark-theme {
+  --primary: #3fb950;
+  --primary-dim: #2ea043;
+  --primary-container: #1a4023;
+  --on-primary-container: #56d364;
+  --surface: #0d1117;
+  --surface-container-low: #161b22;
+  --surface-container-lowest: #010409;
+  --surface-container-highest: #30363d;
+  --surface-variant: #21262d;
+  --on-surface: #e6edf3;
+  --on-surface-variant: #8b949e;
+  --outline: #6e7681;
+  --outline-variant: #30363d;
+  --card-border: rgba(99, 135, 171, 0.12);
+  --card-shadow: rgba(0, 0, 0, 0.3);
+  --slider-thumb: #e6edf3;
+}
+
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   font-size: 14px;
-  color: #1f2328;
-  background: #ffffff;
-  width: 280px;
+  color: var(--on-surface);
+  background: var(--surface);
+  width: 360px;
 }
 
-.container {
-  padding: 16px;
+/* Screen-reader only utility (keeps resetBtn accessible but hidden) */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
 }
 
-h1 {
-  font-size: 16px;
-  font-weight: 600;
-  margin-bottom: 4px;
+/* ── Header ─────────────────────────────────────────────────────── */
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 16px;
+  background: var(--surface);
+  position: sticky;
+  top: 0;
+  z-index: 10;
 }
 
-.subtitle {
-  color: #656d76;
-  font-size: 12px;
-  margin-bottom: 16px;
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
+
+.header-icon {
+  color: var(--primary);
+  font-size: 22px;
+}
+
+.header-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--on-surface);
+  letter-spacing: -0.02em;
+}
+
+.version-badge {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--on-surface-variant);
+  background: var(--card-border);
+  padding: 2px 8px;
+  border-radius: 12px;
+}
+
+/* ── Main ───────────────────────────────────────────────────────── */
+
+.main {
+  padding: 4px 16px 12px;
+}
+
+/* ── Sections ───────────────────────────────────────────────────── */
 
 .section {
-  margin-bottom: 16px;
-  padding-bottom: 12px;
-  border-bottom: 1px solid #d0d7de;
+  margin-bottom: 12px;
 }
 
-.section:last-of-type {
-  border-bottom: none;
+.section:last-child {
+  margin-bottom: 0;
 }
 
-h2 {
-  font-size: 12px;
-  font-weight: 600;
-  color: #656d76;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 4px;
   margin-bottom: 8px;
 }
 
-.toggle {
+.section-icon {
+  color: var(--outline);
+  font-size: 16px;
+}
+
+.section-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--on-surface-variant);
+  display: block;
+  margin-bottom: 8px;
+}
+
+.section-header .section-label {
+  margin-bottom: 0;
+}
+
+/* ── Master Card (Global Controls) ──────────────────────────────── */
+
+.master-card {
+  background: var(--surface-container-lowest);
+  border-radius: 12px;
+  padding: 12px 16px;
+  border: 0.5px solid var(--card-border);
+  box-shadow: 0 1px 3px var(--card-shadow);
   display: flex;
   align-items: center;
-  padding: 6px 0;
+  justify-content: space-between;
+  transition: opacity 0.3s ease;
+}
+
+.master-card.master-overridden {
+  opacity: 0.4;
+}
+
+.master-card-content {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.master-icon-box {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: var(--primary-container);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.master-icon-box .material-symbols-outlined {
+  color: var(--on-primary-container);
+  font-size: 22px;
+}
+
+.master-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--on-surface);
+}
+
+.master-description {
+  font-size: 13px;
+  color: var(--on-surface-variant);
+  margin-top: 1px;
+}
+
+/* ── Filter Card ────────────────────────────────────────────────── */
+
+.filter-card {
+  background: var(--surface-container-low);
+  border-radius: 12px;
+  padding: 4px;
+}
+
+.filter-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  border-radius: 8px;
+  transition: background 0.15s;
   cursor: pointer;
+}
+
+.filter-row:hover {
+  background: var(--surface-container-highest);
+}
+
+.filter-row-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.row-icon {
+  color: var(--outline);
+  font-size: 20px;
+}
+
+.filter-name {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--on-surface);
+}
+
+/* ── Toggle Switch ──────────────────────────────────────────────── */
+
+.toggle {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
 }
 
 .toggle input {
@@ -63,59 +254,53 @@ h2 {
 .slider {
   width: 36px;
   height: 20px;
-  background: #d0d7de;
+  background: var(--surface-variant);
   border-radius: 10px;
   position: relative;
   transition: background 0.2s;
-  flex-shrink: 0;
+  cursor: pointer;
 }
 
 .slider::after {
   content: '';
   position: absolute;
-  width: 16px;
-  height: 16px;
-  background: white;
+  width: 12px;
+  height: 12px;
+  background: var(--slider-thumb);
   border-radius: 50%;
-  top: 2px;
-  left: 2px;
+  top: 4px;
+  left: 4px;
   transition: transform 0.2s;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 }
 
 .toggle input:checked + .slider {
-  background: #1f883d;
+  background: var(--primary);
 }
 
 .toggle input:checked + .slider::after {
   transform: translateX(16px);
 }
 
-.label {
-  margin-left: 10px;
-  flex-grow: 1;
+/* Large toggle for master control */
+.toggle-large .slider {
+  width: 48px;
+  height: 24px;
+  border-radius: 12px;
 }
 
-.actions {
-  margin-top: 8px;
+.toggle-large .slider::after {
+  width: 16px;
+  height: 16px;
+  top: 4px;
+  left: 4px;
 }
 
-.btn {
-  width: 100%;
-  padding: 8px 12px;
-  border-radius: 6px;
-  font-size: 12px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: background 0.2s;
+.toggle-large input:checked + .slider::after {
+  transform: translateX(24px);
 }
 
-.btn-secondary {
-  background: #f6f8fa;
-  border: 1px solid #d0d7de;
-  color: #24292f;
-}
+/* ── Material Symbols base ──────────────────────────────────────── */
 
-.btn-secondary:hover {
-  background: #f3f4f6;
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
 }
