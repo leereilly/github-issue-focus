@@ -1,3 +1,5 @@
+<div align="center"><a href="https://www.producthunt.com/products/github-issue-focus?embed=true&amp;utm_source=badge-featured&amp;utm_medium=badge&amp;utm_campaign=badge-github-issue-focus" target="_blank" rel="noopener noreferrer"><img alt="GitHub Issue Focus - Clean GitHub issue timelines. Focus on real discussion only! | Product Hunt" width="250" height="54" src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1103862&amp;theme=light&amp;t=1774238086664"></a></div>
+
 # GitHub Issue Focus
 
 GitHub Issue Focus is a [Chrome extension](https://chromewebstore.google.com/detail/github-issue-focus/oglmkaafpnkanegndcglfnmengaecfak?hl=en&authuser=0) that cleans up noisy issue and pull request timelines so you can actually follow the conversation.
